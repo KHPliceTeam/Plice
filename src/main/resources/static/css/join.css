@@ -1,0 +1,53 @@
+.join_container {
+  width: 600px;
+  margin: 120px auto;
+  border: var(--login-border);
+  padding: 50px 45px;
+  position: relative;
+}
+.join_title {
+  font-size: 30px;
+  border-bottom: var(--login-border);
+  margin-bottom: 30px;
+  padding-bottom: 30px;
+}
+.join_subtitle {
+  font-size: 15px;
+  margin-bottom: 30px;
+}
+#join_form label {
+  float: left;
+  font-size: 15px;
+  margin-bottom: 5px;
+  width: 100%;
+}
+#join_form input {
+  float: left;
+  margin-bottom: 20px;
+  border: var(--login-border);
+  padding: 15px 5px;
+  border-radius: 5px;
+  width: 100%;
+}
+.join_birth {
+  display: flex;
+  justify-content: space-between;
+  float: left;
+  width: 100%;
+}
+.join_birth_column {
+  width: 33%;
+}
+#join_sel {
+  border: var(--login-border);
+  width: 100%;
+  height: 50%;
+  border-radius: 5px;
+}
+.join_btn {
+  width: 100%;
+  background-color: #dfdfdf;
+  color: white;
+  padding: 20px 0px;
+  font-size: 18px;
+}

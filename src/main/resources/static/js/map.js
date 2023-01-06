@@ -62,7 +62,7 @@ $(function () {
     //             type: "post",
     //             url: "/map/trade-search",
     //             data: params,
-    //             dataType: "json"
+    //             dataType: "/json"
     //         }).done(function (data) {
     //           console.log(data);
     //         });
