@@ -34,4 +34,14 @@ public class JoinController {
     public String usePersonalForm(){
         return "use-personal";
     }
+
+    @GetMapping("/marketing")
+    public String marketingForm(){
+        return "marketing";
+    }
+
+    @GetMapping("/term-of-service")
+    public String termOfServiceForm(){
+        return "term-of-service";
+    }
 }

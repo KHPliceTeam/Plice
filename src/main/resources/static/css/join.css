@@ -41,7 +41,7 @@
 #join_sel {
   border: var(--login-border);
   width: 100%;
-  height: 50%;
+  height: 47px;
   border-radius: 5px;
 }
 .join_btn {
@@ -50,4 +50,36 @@
   color: white;
   padding: 20px 0px;
   font-size: 18px;
+}
+/* JavaScript */
+.hidden_text {
+  font-size: 13px;
+  margin-left: 10px;
+}
+.id_success_text,
+.name_success_text,
+.nick_success_text,
+.pwd_success_text,
+.repwd_success_text,
+.yy_success_text,
+.mm_success_text,
+.dd_success_text {
+  color: var(--login-color);
+  display: none;
+}
+.id_failed_text,
+.name_failed_text,
+.nick_failed_text,
+.pwd_failed_text,
+.repwd_failed_text,
+.yy_failed_text,
+.mm_failed_text,
+.dd_failed_text {
+  color: red;
+  display: none;
+}
+
+/* JavaScript 반응형 */
+.disable {
+  pointer-events: none;
 }
