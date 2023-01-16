@@ -81,7 +81,7 @@
 }
 .join_btn {
   width: 100%;
-  background-color: var(--login-color);
+  background-color: #4169FC;
   color: white;
   padding: 20px 0px;
   font-size: 18px;
