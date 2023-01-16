@@ -16,6 +16,11 @@ function joinYY(obj) {
 }
 
 // 아이디 - 전화번호
+
+
+// 최종가입
+
+$(function () {
 $("#join_id").on("keyup", function () {
   const idRgx = /01[016789][^0][0-9]{3,4}[0-9]{3,4}/;
   const idInput = document.querySelector("#join_id").value;
@@ -178,9 +183,6 @@ $("#yy").on("keyup", function () {
   }
 });
 
-// 최종가입
-
-$(function () {
   $(".update_btn").on("keyup", function () {
     const idRgx = /01[016789][^0][0-9]{3,4}[0-9]{3,4}/;
     const nameRgx = /^[가-힣]{2,3}$/;
