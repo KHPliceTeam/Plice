@@ -155,8 +155,8 @@ public class InitDb {
 
             admins.add(Member.builder()
                     .name("문태웅")
-                    .nickname("문태웅")
-                    .phone("01033149467")
+                    .nickname("문태웅1")
+                    .phone("01033149468")
                     .pw(passwordEncoder.encode("1234"))
                     .role(MemberRole.ADMIN)
                     .build());
@@ -171,35 +171,35 @@ public class InitDb {
 
             admins.forEach(admin -> em.persist(admin));
 
-            List<ChatRoom> chatRooms = apartDataRepository.findAll().stream().map(apartData ->
-                    ChatRoom.builder().apartData(apartData).build()).collect(Collectors.toList());
-
-            chatRooms.get(10000).changeMemberCount(8);
-            chatRooms.get(5000).changeMemberCount(6);
-            chatRooms.get(1000).changeMemberCount(1);
-            chatRooms.forEach(e -> em.persist(e));
-
-            List<MemberChatRoom> memberChatRooms = new ArrayList<>();
-
-            memberChatRooms.add(MemberChatRoom.builder().chatRoom(chatRooms.get(10000)).member(members.get(0)).build());
-            memberChatRooms.add(MemberChatRoom.builder().chatRoom(chatRooms.get(10000)).member(members.get(1)).build());
-            memberChatRooms.add(MemberChatRoom.builder().chatRoom(chatRooms.get(10000)).member(members.get(2)).build());
-            memberChatRooms.add(MemberChatRoom.builder().chatRoom(chatRooms.get(10000)).member(members.get(3)).build());
-            memberChatRooms.add(MemberChatRoom.builder().chatRoom(chatRooms.get(10000)).member(members.get(4)).build());
-            memberChatRooms.add(MemberChatRoom.builder().chatRoom(chatRooms.get(10000)).member(members.get(5)).build());
-            memberChatRooms.add(MemberChatRoom.builder().chatRoom(chatRooms.get(10000)).member(members.get(6)).build());
-            memberChatRooms.add(MemberChatRoom.builder().chatRoom(chatRooms.get(10000)).member(members.get(7)).build());
-
-            memberChatRooms.add(MemberChatRoom.builder().chatRoom(chatRooms.get(5000)).member(members.get(0)).build());
-            memberChatRooms.add(MemberChatRoom.builder().chatRoom(chatRooms.get(5000)).member(members.get(1)).build());
-            memberChatRooms.add(MemberChatRoom.builder().chatRoom(chatRooms.get(5000)).member(members.get(2)).build());
-            memberChatRooms.add(MemberChatRoom.builder().chatRoom(chatRooms.get(5000)).member(members.get(3)).build());
-            memberChatRooms.add(MemberChatRoom.builder().chatRoom(chatRooms.get(5000)).member(members.get(4)).build());
-            memberChatRooms.add(MemberChatRoom.builder().chatRoom(chatRooms.get(5000)).member(members.get(5)).build());
-
-            memberChatRooms.add(MemberChatRoom.builder().chatRoom(chatRooms.get(1000)).member(members.get(0)).build());
-
-            memberChatRooms.forEach(memberChatRoom -> em.persist(memberChatRoom));
+//            List<ChatRoom> chatRooms = apartDataRepository.findAll().stream().map(apartData ->
+//                    ChatRoom.builder().apartData(apartData).build()).collect(Collectors.toList());
+//
+//            chatRooms.get(10000).changeMemberCount(8);
+//            chatRooms.get(5000).changeMemberCount(6);
+//            chatRooms.get(1000).changeMemberCount(1);
+//            chatRooms.forEach(e -> em.persist(e));
+//
+//            List<MemberChatRoom> memberChatRooms = new ArrayList<>();
+//
+//            memberChatRooms.add(MemberChatRoom.builder().chatRoom(chatRooms.get(10000)).member(members.get(0)).build());
+//            memberChatRooms.add(MemberChatRoom.builder().chatRoom(chatRooms.get(10000)).member(members.get(1)).build());
+//            memberChatRooms.add(MemberChatRoom.builder().chatRoom(chatRooms.get(10000)).member(members.get(2)).build());
+//            memberChatRooms.add(MemberChatRoom.builder().chatRoom(chatRooms.get(10000)).member(members.get(3)).build());
+//            memberChatRooms.add(MemberChatRoom.builder().chatRoom(chatRooms.get(10000)).member(members.get(4)).build());
+//            memberChatRooms.add(MemberChatRoom.builder().chatRoom(chatRooms.get(10000)).member(members.get(5)).build());
+//            memberChatRooms.add(MemberChatRoom.builder().chatRoom(chatRooms.get(10000)).member(members.get(6)).build());
+//            memberChatRooms.add(MemberChatRoom.builder().chatRoom(chatRooms.get(10000)).member(members.get(7)).build());
+//
+//            memberChatRooms.add(MemberChatRoom.builder().chatRoom(chatRooms.get(5000)).member(members.get(0)).build());
+//            memberChatRooms.add(MemberChatRoom.builder().chatRoom(chatRooms.get(5000)).member(members.get(1)).build());
+//            memberChatRooms.add(MemberChatRoom.builder().chatRoom(chatRooms.get(5000)).member(members.get(2)).build());
+//            memberChatRooms.add(MemberChatRoom.builder().chatRoom(chatRooms.get(5000)).member(members.get(3)).build());
+//            memberChatRooms.add(MemberChatRoom.builder().chatRoom(chatRooms.get(5000)).member(members.get(4)).build());
+//            memberChatRooms.add(MemberChatRoom.builder().chatRoom(chatRooms.get(5000)).member(members.get(5)).build());
+//
+//            memberChatRooms.add(MemberChatRoom.builder().chatRoom(chatRooms.get(1000)).member(members.get(0)).build());
+//
+//            memberChatRooms.forEach(memberChatRoom -> em.persist(memberChatRoom));
         }
     }
 }

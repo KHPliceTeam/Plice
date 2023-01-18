@@ -15,4 +15,10 @@ public interface MemberService {
     public Member findByPhone(String phone);
     public void update(Long id, MemberDto memberDto);
     public void delete(Long id);
+
+    public String checkPhone(String idInput);
+    public String checkNick(String nickInput);
+
+    /*public void certifiedPhoneNumber(String phoneNumber);*/
+
 }

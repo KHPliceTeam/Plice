@@ -36,4 +36,9 @@ $(function () {
     $("#all_check").prop("checked", false);
     $(".term_check").prop("checked", false);
   });
+
+  $(".term-ser").click(function () {
+    $("#all_check").prop("checked", false);
+    $(".term_check").prop("checked", false);
+  });
 });
