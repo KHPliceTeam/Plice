@@ -19,6 +19,6 @@ public interface MemberService {
     public String checkPhone(String idInput);
     public String checkNick(String nickInput);
 
-    /*public void certifiedPhoneNumber(String phoneNumber);*/
+    public void certifiedPhoneNumber(String phoneNumber);
 
 }

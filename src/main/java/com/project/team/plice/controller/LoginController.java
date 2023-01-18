@@ -59,14 +59,11 @@ public class LoginController {
         return memberService.checkPhone(idInput);
     }
 
-
-    /*
     @GetMapping("/login/send-message")
     @ResponseBody
     public String sendMessage(@RequestParam("phone") String phone) {
         memberService.certifiedPhoneNumber(phone);
         return "send complete";
     }
-     */
 
 }

@@ -14,14 +14,17 @@ $(function () {
       $(".pwd_find_container").hide().removeClass("bg_white");
       $(".pwd_find_check_input").val("").css("border","1px solid #c9d5ff").attr("readonly", false);
       $(".accept_opt").fadeOut(300); // 0.3초
-      $(".hide_text").hide();
+      $(".accept_btn").attr("disabled", true);
       $(".background").removeClass("bg_black");
-      $(".pwd_find_btn").css("background-color", "#dfdfdf").css("color", "whte").html("인증번호 받기");
+      $(".pwd_find_btn").css("background-color", "#dfdfdf").css("color", "white").html("인증번호 받기");
   });
 
   $(".accept_btn").click(function () {
     $(".pwd_find_container").hide().removeClass("bg_white");
     $(".background").removeClass("bg_black");
+    $(".accept_opt").fadeOut(300); // 0.3초
+    $(".pwd_find_check_input").val("").css("border","1px solid #c9d5ff").attr("readonly", false);
+    $(".pwd_find_btn").css("background-color", "#dfdfdf").css("color", "white").html("인증번호 받기");
   });
 
 /*

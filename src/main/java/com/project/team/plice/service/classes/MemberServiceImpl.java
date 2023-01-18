@@ -87,7 +87,7 @@ public class MemberServiceImpl implements MemberService {
         }
     }
 
-    /*
+
     @Override
     public void certifiedPhoneNumber(String phoneNumber) {
         Random rand  = new Random();
@@ -121,7 +121,6 @@ public class MemberServiceImpl implements MemberService {
         }
 
     }
-    */
 
 
 }
