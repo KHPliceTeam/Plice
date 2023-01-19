@@ -1,19 +1,20 @@
 package com.project.team.plice.controller;
 
 import com.project.team.plice.domain.member.Member;
+import com.project.team.plice.dto.member.MemberDto;
 import com.project.team.plice.service.interfaces.AdminService;
 import com.project.team.plice.service.interfaces.MemberService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import java.util.Random;
 
 @Slf4j
 @Controller
@@ -52,6 +53,18 @@ public class LoginController {
         return memberService.checkPhone(findPwd);
     }
 
+    @GetMapping("/login/update")
+    public String pwUpdate(@RequestParam("phone") String phone, Model model) {
+        model.addAttribute("phone", phone);
+        return "layout-content/login/pw-reset";
+    }
+
+    @PostMapping("/login/pass-update")
+    public String passUpdate(@RequestParam("phone") String phone, @RequestParam("pw") String pw) {
+        memberService.update(phone, pw);
+        return "layout-content/login/login";
+    }
+
     @GetMapping("/login/check")
     @ResponseBody
     public String idCheck(@RequestParam("idInput") String idInput) {
@@ -59,11 +72,12 @@ public class LoginController {
         return memberService.checkPhone(idInput);
     }
 
+
     @GetMapping("/login/send-message")
     @ResponseBody
     public String sendMessage(@RequestParam("phone") String phone) {
-        memberService.certifiedPhoneNumber(phone);
-        return "send complete";
+        return memberService.certifiedPhoneNumber(phone);
     }
+
 
 }

@@ -61,11 +61,22 @@ public class MemberServiceImpl implements MemberService {
 
     @Transactional
     public void update(Long id, MemberDto memberDto) {
+
+    }
+
+    @Override
+    @Transactional
+    public void update(String phone, String pw) {
+        Member member = memberRepository.findByPhone(phone).get();
+        member.changePw(pw, passwordEncoder);
+        memberRepository.save(member);
     }
 
     @Transactional
     public void delete(Long id){
     }
+
+
 
     @Override
     public String checkPhone(String idInput) {
@@ -88,8 +99,9 @@ public class MemberServiceImpl implements MemberService {
     }
 
 
+
     @Override
-    public void certifiedPhoneNumber(String phoneNumber) {
+    public String certifiedPhoneNumber(String phoneNumber) {
         Random rand  = new Random();
         String numStr = "";
         for(int i=0; i<6; i++) {
@@ -120,7 +132,7 @@ public class MemberServiceImpl implements MemberService {
             System.out.println(e.getCode());
         }
 
+        return numStr;
     }
-
 
 }

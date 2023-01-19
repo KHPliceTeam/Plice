@@ -67,4 +67,8 @@ public class MemberDto {
                 .profileImgPath(this.profileImgPath)
                 .build();
     }
+
+    public void changePw(String pw, PasswordEncoder passwordEncoder){
+        this.pw = passwordEncoder.encode(pw);
+    }
 }

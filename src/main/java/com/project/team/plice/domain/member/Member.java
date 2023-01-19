@@ -7,6 +7,7 @@ import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import javax.persistence.*;
 import java.time.LocalDate;
@@ -113,5 +114,9 @@ public class Member implements UserDetails {
     @Override
     public boolean isEnabled() {
         return false;
+    }
+
+    public void changePw(String pw, PasswordEncoder passwordEncoder){
+        this.pw = passwordEncoder.encode(pw);
     }
 }
