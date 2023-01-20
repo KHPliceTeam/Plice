@@ -34,7 +34,7 @@ public class JoinController {
     @PostMapping("/join")
     public String joinMember(@ModelAttribute MemberDto memberDto){
         memberService.join(memberDto);
-        return "redirect:/";
+        return "layout-content/join/join-success";
     }
 
     @GetMapping("/join-success")
