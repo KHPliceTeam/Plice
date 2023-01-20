@@ -1,6 +1,10 @@
 package com.project.team.plice.web.security;
 
 import com.project.team.plice.service.classes.LoginServiceImpl;
+import com.project.team.plice.socialauth.oauth2.handler.OAuth2AuthenticationFailureHandler;
+import com.project.team.plice.socialauth.oauth2.handler.OAuth2AuthenticationSuccessHandler;
+import com.project.team.plice.socialauth.oauth2.service.CustomOAuth2AuthService;
+import com.project.team.plice.socialauth.oauth2.service.CustomOidcUserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -28,6 +32,16 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     private final LoginServiceImpl loginService;
     private final DataSource dataSource;
     private final AuthenticationSuccessHandler authenticationSuccessHandler;
+
+    // sns Login
+    private final CustomOAuth2AuthService customOAuth2AuthService;
+
+    private final CustomOidcUserService customOidcUserService;
+
+    private final OAuth2AuthenticationSuccessHandler oAuth2AuthenticationSuccessHandler;
+
+    private final OAuth2AuthenticationFailureHandler oAuth2AuthenticationFailureHandler;
+
 
 
 
@@ -94,6 +108,24 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .maximumSessions(1)
                 .maxSessionsPreventsLogin(false);
 
+
+        // sns Login
+        http
+                .httpBasic().disable()
+                .formLogin().disable()
+                .csrf().disable()
+                .cors()
+                .and()
+                .sessionManagement()
+                .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+                .and()
+                .oauth2Login()
+                .userInfoEndpoint()
+                .oidcUserService(customOidcUserService)
+                .userService(customOAuth2AuthService)
+                .and()
+                .successHandler(oAuth2AuthenticationSuccessHandler)
+                .failureHandler(oAuth2AuthenticationFailureHandler);
 
     }
 
