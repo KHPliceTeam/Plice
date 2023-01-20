@@ -81,7 +81,7 @@
 }
 .join_btn {
   width: 100%;
-  background-color: #4169FC;
+  background-color: #3b5987;
   color: white;
   padding: 20px 0px;
   font-size: 18px;
@@ -169,7 +169,7 @@ pointer-events: none;
 
 .able {
   position: relative;
-  background-color: black;
+  background-color: #3b5987;
   border-radius: 4em;
   font-weight: bold;
   color: white;

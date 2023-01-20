@@ -81,8 +81,66 @@ $("#join_nick").on("keyup", function () {
 // 인증번호 버튼 클릭
 $(".join_id_label .id_btn").click(function () {
   $("#join_form .accept_number").fadeIn(500);
-  $(".join_id_label .id_btn").html("전송중").css({ "background-color": "rgb(172, 0, 92)" });
+  $(".join_id_label .id_btn").html("전송중").css({ "background-color": "#3b5987" });
   $(".id_btn").attr("disabled", true);
+
+// 인증번호 받기
+  (async () => {
+     const idRgx = /01[016789][0-9]{4}[0-9]{4}/;
+     const joinNumber = document.querySelector("#join_id").value;
+     const result = await fetch("/login/check?idInput=" + joinNumber).then(res => res.text());
+     console.log(result);
+     if(result != "ok") {    // 일치하는 번호가 없음
+        const accNumber = await fetch("/login/send-message?phone=" + joinNumber).then(res => res.json()); // 인증번호 저장
+        console.log("accNumber = " + accNumber);
+        $("#join_form .accept_container #enterBtn").click(function(e) {
+            e.preventDefault();
+            console.log("accNumber = " + accNumber);
+            const accUser = $("#join_form .accept_container #sms").val(); // 유저가 입력한 인증번호
+            console.log("accUser = " + accUser);
+            if(accNumber == accUser) {
+                alert("인증번호가 일치합니다.");
+                $("#join_form .accept_number").fadeOut(500);
+                $(".join_id_label .id_btn").removeClass("able");
+                $(".join_id_label .id_btn").html("인증완료").css({ backgroundColor: "#3b5987", color: "white" }).addClass("btn_disable");
+                $("#join_form #join_id").attr("readonly", true);
+            }else{
+                alert("인증번호가 일치하지 않습니다. 다시 입력해주세요.");
+                $("#join_form .accept_container #sms").val("");
+                  // 타이머
+                  let time = 180; // 기준 시간
+                  let min = ""; // 분
+                  let sec = ""; // 초
+
+                  let timer = setInterval(function () {
+                    min = String(parseInt(time / 60)).padStart(2, "0"); // 몫을 계산
+                    sec = String(time % 60).padStart(2, "0"); // 나머지 계산
+
+                    document.querySelector("#timer").innerHTML = min + ":" + sec;
+                    time--;
+
+                    $("#join_form .accept_btn").click(function () {
+                      clearInterval(timer);
+                    });
+
+                    // 타임 아웃 시
+                    if (time < 0) {
+                      clearInterval(timer); // setInterval() 실행을 끝냄
+                      document.querySelector(".join_id_label .id_btn").innerHTML = "시간초과";
+                      $(".join_id_label .id_btn").css({ "background-color": "black" });
+                      $("#join_form .accept_btn").addClass("disable");
+                    }
+                  }, 1000);
+                  $(".join_id_label .id_btn").css({ "pointer-events": "none" });
+                  $("#join_form #join_id").attr("readonly", true);
+
+
+            }
+        })
+     }else{     // 일치함
+         console.log("가입된 번호 있음");
+     }
+   })();
 
   // 타이머
   let time = 180; // 기준 시간
@@ -111,55 +169,9 @@ $(".join_id_label .id_btn").click(function () {
   $(".join_id_label .id_btn").css({ "pointer-events": "none" });
   $("#join_form #join_id").attr("readonly", true);
 
-// 인증번호 받기
-  (async () => {
-     const idRgx = /01[016789][0-9]{4}[0-9]{4}/;
-     const joinNumber = document.querySelector("#join_id").value;
-     const result = await fetch("/login/check?idInput=" + joinNumber).then(res => res.text());
-     console.log(result);
-     if(result != "ok") {    // 일치하는 번호가 없음
-        const accNumber = await fetch("/login/send-message?phone=" + joinNumber).then(res => res.json()); // 인증번호 저장
-        console.log("accNumber = " + accNumber);
-        $("#join_form .accept_container #enterBtn").click(function(e) {
-            e.preventDefault();
-            console.log("accNumber = " + accNumber);
-            const accUser = $("#join_form .accept_container #sms").val(); // 유저가 입력한 인증번호
-            console.log("accUser = " + accUser);
-            if(accNumber == accUser) {
-                alert("인증번호가 일치합니다.");
-                $("#join_form .accept_number").fadeOut(500);
-                $(".join_id_label .id_btn").removeClass("able");
-                $(".join_id_label .id_btn").html("인증완료").css({ backgroundColor: "rgb(0 31 255)", color: "white" }).addClass("btn_disable");
-                $("#join_form #join_id").attr("readonly", true);
-            }else{
-                alert("인증번호가 일치하지 않습니다. 다시 입력해주세요.");
-                $("#join_form .accept_container #sms").val("");
-
-            }
-        })
-     }else{     // 일치함
-         console.log("가입된 번호 있음");
-     }
-   })();
-
-
-
-
-
 
 
 });
-
-// 인증번호 확인 버튼
-/*
-$("#join_form .accept_btn").click(function (e) {
-  e.preventDefault();
-  $("#join_form .accept_number").fadeOut(500);
-  $(".join_id_label .id_btn").removeClass("able");
-  $(".join_id_label .id_btn").html("인증완료").css({ backgroundColor: "rgb(0 31 255)", color: "white" }).addClass("btn_disable");
-  $("#join_form #join_id").attr("readonly", true);
-});
-*/
 
 
 // 이름

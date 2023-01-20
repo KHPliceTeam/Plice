@@ -20,6 +20,8 @@ public interface MemberService {
     public String checkPhone(String idInput);
     public String checkNick(String nickInput);
 
+    public Member loginErrorCheck(String loginId);
+
     public String certifiedPhoneNumber(String phoneNumber);
 
 }

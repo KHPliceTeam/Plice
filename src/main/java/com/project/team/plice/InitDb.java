@@ -152,15 +152,15 @@ public class InitDb {
                     .pw(passwordEncoder.encode("1234"))
                     .role(MemberRole.ADMIN)
                     .build());
-
+/*
             admins.add(Member.builder()
                     .name("문태웅")
-                    .nickname("문태웅1")
-                    .phone("01033149468")
+                    .nickname("문태웅")
+                    .phone("01033149467")
                     .pw(passwordEncoder.encode("1234"))
                     .role(MemberRole.ADMIN)
                     .build());
-
+*/
             admins.add(Member.builder()
                     .name("윤수호")
                     .nickname("윤수호")

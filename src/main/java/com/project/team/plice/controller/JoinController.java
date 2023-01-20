@@ -57,8 +57,6 @@ public class JoinController {
         return memberService.checkNick(nickInput);
     }
 
-
-
     @GetMapping("/term-service")
     public String termServiceForm(HttpServletRequest request, Authentication authentication){
         adminService.logAccess(request, authentication);

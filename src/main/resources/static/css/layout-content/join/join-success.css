@@ -35,5 +35,8 @@
 .home_btn {
   position: absolute;
   bottom: -150px;
+  background-color: inherit;
   font-size: 20px;
+  font-weight: bold;
+  color: #3b5987;
 }
