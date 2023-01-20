@@ -55,6 +55,7 @@ public class LoginController {
 
     @GetMapping("/login/update")
     public String pwUpdate(@RequestParam("phone") String phone, Model model) {
+        System.out.println("phone = " + phone);
         model.addAttribute("phone", phone);
         return "layout-content/login/pw-reset";
     }

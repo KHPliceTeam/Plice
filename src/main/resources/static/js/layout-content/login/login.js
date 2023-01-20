@@ -69,7 +69,7 @@ $(function () {
             if(userNum == accNumber) {
                 alert("인증번호가 일치합니다.");
                 console.log("일치할 때 userNum = " + userNum);
-                location.href = "/login/update?phone=" + idInput;
+                location.href = "/login/update?phone=" + $(".pwd_find_container .pwd_find_check_input").val();
             } else {
                 alert("인증번호가 일치하지 않습니다. 다시 입력해주세요.");
                 $("#accept_code").val("").focus();
