@@ -60,10 +60,39 @@ $(function () {
    })();
  });
 
-
-
-
-
-
+$(".login_btn").click(function(e) {
+    e.preventDefault();
+    const loginId = document.querySelector("#login_id").value;
+    const loginPwd = document.querySelector("#login_pwd").value;
+    if(loginId == "") {
+        Swal.fire({
+            icon: 'warning',
+            title: '아이디를 등록해주세요....'
+        })
+    } else if(loginId != "") {
+        (async () => {
+            const result = await fetch("/login/check?idInput=" + loginId).then(res => res.text());
+            console.log("result = " + result);
+            console.log("loginId = " + loginId);
+            if(result != "ok") {    // 등록된 회원이 없다.
+                Swal.fire({
+                  icon: 'error',
+                  title: '등록된 회원이 아닙니다....',
+                  text: '다시 입력해주세요!'
+                })
+                $("#login_id").val("");
+                $("#login_pwd").val("");
+            } else {
+                Swal.fire({
+                  icon: 'success',
+                  title: '로그인에 성공하였습니다!!'
+                })
+                $(".swal2-confirm").click(function() {
+                    $(".login_info").submit();
+                })
+            }
+        })();
+    }
+})
 
 });

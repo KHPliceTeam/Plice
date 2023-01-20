@@ -98,12 +98,6 @@ public class MemberServiceImpl implements MemberService {
         }
     }
 
-    @Override
-    public Member loginErrorCheck(String loginId) {
-        Member member = memberRepository.findByPhone(loginId).get();
-        return member;
-    }
-
 
     @Override
     public String certifiedPhoneNumber(String phoneNumber) {
