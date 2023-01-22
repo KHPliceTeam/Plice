@@ -3,12 +3,15 @@ package com.project.team.plice.dto.member;
 import com.project.team.plice.domain.enums.MemberRole;
 import com.project.team.plice.domain.member.Favorite;
 import com.project.team.plice.domain.member.Member;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.validation.constraints.NotBlank;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -63,5 +66,9 @@ public class MemberDto {
                 .favorite(this.favorite)
                 .profileImgPath(this.profileImgPath)
                 .build();
+    }
+
+    public void changePw(String pw, PasswordEncoder passwordEncoder){
+        this.pw = passwordEncoder.encode(pw);
     }
 }

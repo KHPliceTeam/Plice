@@ -37,4 +37,8 @@ public class WebMvcConfiguration implements WebMvcConfigurer {
                 .addResourceLocations(PermittedPath); // 로컬에 저장된 파일을 읽어 올 root 경로 설정
     }
 
+
+
+
+
 }

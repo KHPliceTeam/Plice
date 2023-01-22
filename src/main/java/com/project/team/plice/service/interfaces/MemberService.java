@@ -14,5 +14,13 @@ public interface MemberService {
     public Member findById(Long memberId);
     public Member findByPhone(String phone);
     public void update(Long id, MemberDto memberDto);
+    public void update(String phone, String pw);
     public void delete(Long id);
+
+    public String checkPhone(String idInput);
+    public String checkNick(String nickInput);
+
+
+    public String certifiedPhoneNumber(String phoneNumber);
+
 }

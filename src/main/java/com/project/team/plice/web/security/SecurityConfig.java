@@ -1,6 +1,10 @@
 package com.project.team.plice.web.security;
 
 import com.project.team.plice.service.classes.LoginServiceImpl;
+import com.project.team.plice.socialauth.oauth2.handler.OAuth2AuthenticationFailureHandler;
+import com.project.team.plice.socialauth.oauth2.handler.OAuth2AuthenticationSuccessHandler;
+import com.project.team.plice.socialauth.oauth2.service.CustomOAuth2AuthService;
+import com.project.team.plice.socialauth.oauth2.service.CustomOidcUserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -9,7 +13,10 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.security.web.authentication.rememberme.JdbcTokenRepositoryImpl;
 import org.springframework.security.web.authentication.rememberme.PersistentTokenRepository;
@@ -25,6 +32,18 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     private final LoginServiceImpl loginService;
     private final DataSource dataSource;
     private final AuthenticationSuccessHandler authenticationSuccessHandler;
+
+    // sns Login
+    private final CustomOAuth2AuthService customOAuth2AuthService;
+
+    private final CustomOidcUserService customOidcUserService;
+
+    private final OAuth2AuthenticationSuccessHandler oAuth2AuthenticationSuccessHandler;
+
+    private final OAuth2AuthenticationFailureHandler oAuth2AuthenticationFailureHandler;
+
+
+
 
     private static final String[] STATIC_WHITELIST = {
             "/img/**", "/css/**", "/js/**", "/upload-img/**"
@@ -52,6 +71,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         jdbcTokenRepository.setDataSource(dataSource);
         return jdbcTokenRepository;
     }
+
+
+
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
@@ -85,6 +107,26 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http.sessionManagement()
                 .maximumSessions(1)
                 .maxSessionsPreventsLogin(false);
+
+
+        // sns Login
+        http
+                .httpBasic().disable()
+                .formLogin().disable()
+                .csrf().disable()
+                .cors()
+                .and()
+                .sessionManagement()
+                .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+                .and()
+                .oauth2Login()
+                .userInfoEndpoint()
+                .oidcUserService(customOidcUserService)
+                .userService(customOAuth2AuthService)
+                .and()
+                .successHandler(oAuth2AuthenticationSuccessHandler)
+                .failureHandler(oAuth2AuthenticationFailureHandler);
+
     }
 
     @Override
@@ -100,6 +142,26 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         auth
                 .userDetailsService(loginService).passwordEncoder(passwordEncoder());
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
