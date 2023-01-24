@@ -209,7 +209,7 @@ function replySave(_this){
     parentId: $(_this).parent().find("#parentId").val()
   };
   $.ajax({
-    url: "/reply/" + $("#post-id").val(),
+    url: "/reply-create/" + $("#post-id").val(),
     type: "post",
     data: data,
     dataType: "html",
@@ -218,7 +218,7 @@ function replySave(_this){
       console.log(error);
     }
   }).done(function (replies) {
-    document.location.replace("/story-detail/"+$("#post-id").val());
+    document.location.replace("/post-detail/"+$("#post-id").val());
   });
 }
 

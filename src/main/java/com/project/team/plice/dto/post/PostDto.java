@@ -23,7 +23,6 @@ public class PostDto {
     private List<MultipartFile> imageFiles;
 
     private Integer closed;
-    private Integer reFlag;
     private List<Reply> replies;
 
     private Integer searchBy;

@@ -20,9 +20,11 @@ public interface PostService {
 
     public Page <Post> findByMemberId(Long id, Pageable pageable);
 
-    public Page<Post> findByMemberNickname(String memberNickname, Pageable pageable);
+    public Page<Post> findByMemberNicknameContaining(String memberNickname, Pageable pageable);
 
-    public Page <Post> findByTitle(String title, Pageable pageable);
+    public Page <Post> findByTitleContaining(String title, Pageable pageable);
+
+    public Page <Post> findByContentContaining(String content, Pageable pageable);
 
 
 //  public Page<Post> postList(Pageable pageable);

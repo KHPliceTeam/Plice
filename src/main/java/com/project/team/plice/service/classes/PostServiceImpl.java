@@ -49,11 +49,11 @@ public class PostServiceImpl implements PostService {
         return postRepository.findById(id).get();
     }
 
-    //  게시판 CRUD
-    @Override /* 삽입 + 수정 */
+
+    @Override
     public void savePost(Post post) {
         postRepository.save(post);
-    } // DB에 저장할때는 반환타입 의미없음. 로그찍기라도 하려면 String으로 하는데, 어차피 저장하면 끝이니까 그냥 void 해도 됨
+    }
 
     @Override
     public void deletePost(Post post) {
@@ -73,13 +73,29 @@ public class PostServiceImpl implements PostService {
     }
 
     @Override
-    public Page<Post> findByMemberNickname(String memberNickname, Pageable pageable) {
+    public Page<Post> findByMemberNicknameContaining(String memberNickname, Pageable pageable) {
+        int page = (pageable.getPageNumber() == 0) ? 0 : (pageable.getPageNumber() -1);
+        pageable = PageRequest.of(page, 12, Sort.by("id").descending());
+
         return postRepository.findByMemberNicknameContainsIgnoreCase(memberNickname, pageable);
     }
 
     @Override
-    public Page<Post> findByTitle(String title, Pageable pageable) {
+    public Page<Post> findByTitleContaining(String title, Pageable pageable) {
+
+        int page = (pageable.getPageNumber() == 0) ? 0 : (pageable.getPageNumber() -1);
+        pageable = PageRequest.of(page, 12, Sort.by("id").descending());
+
         return postRepository.findByTitleContainingIgnoreCase(title, pageable);
+    }
+
+    @Override
+    public Page <Post> findByContentContaining(String content, Pageable pageable){
+        int page = (pageable.getPageNumber() == 0) ? 0 : (pageable.getPageNumber() -1);
+        pageable = PageRequest.of(page, 12, Sort.by("id").descending());
+
+        return postRepository.findByContentContainingIgnoreCase(content, pageable);
+
     }
 
 //  **************************************** 페이징 관련 ***************************************

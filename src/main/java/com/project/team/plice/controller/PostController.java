@@ -91,10 +91,18 @@ public class PostController {
     public String findPost(@ModelAttribute PostDto postDto, Model model, Pageable pageable) throws Exception{
         Page<Post> posts;
         if(postDto.getSearchBy() == 1){
-            posts = postService.findByTitle(postDto.getInput(), pageable);
-        } else {
-            posts = postService.findByMemberNickname(postDto.getInput(), pageable);
+            posts = postService.findByMemberNicknameContaining(postDto.getInput(), pageable);
         }
+        else if(postDto.getSearchBy() == 2){
+            posts = postService.findByTitleContaining(postDto.getInput(), pageable);
+        }
+        else if(postDto.getSearchBy() == 3){
+            posts = postService.findByContentContaining(postDto.getInput(), pageable);
+        }
+        else{
+            posts = postService.findAll(pageable);
+        }
+
         DataUtil dataUtil = new DataUtil();
         dataUtil.setSearchBy(postDto.getSearchBy());
         dataUtil.setInput(postDto.getInput());
@@ -115,7 +123,7 @@ public class PostController {
         model.addAttribute("post", post);
         model.addAttribute("prevPost",prev);
         model.addAttribute("nextPost",next);
-        return "/layout-content/post/story-detail";
+        return "redirect:/story-detail?id=" + id;
     }
 
     @PostMapping("/reply-modify")
@@ -127,7 +135,7 @@ public class PostController {
         model.addAttribute("post", post);
         model.addAttribute("prevPost",prev);
         model.addAttribute("nextPost",next);
-        return "layout-content/post/story-detail";
+        return "redirect:/story-detail?id=" + id;
     }
 
     @PostMapping("/reply-delete")
@@ -140,7 +148,7 @@ public class PostController {
         model.addAttribute("post", post);
         model.addAttribute("prevPost",prev);
         model.addAttribute("nextPost",next);
-        return "layout-content/post/story-detail";
+        return "redirect:/story-detail?id=" + id;
     }
 
 }
