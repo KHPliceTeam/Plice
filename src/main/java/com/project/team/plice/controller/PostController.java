@@ -151,4 +151,13 @@ public class PostController {
         return "redirect:/story-detail?id=" + id;
     }
 
+    @GetMapping("/post/story-detail")
+    public String storyDetail(HttpServletRequest request, Authentication authentication) {
+        return "layout-content/post/story-detail";
+    }
+
+    @GetMapping("/post/notice-detail")
+    public String noticeDetail(HttpServletRequest request, Authentication authentication) {
+        return "layout-content/post/notice-detail";
+    }
 }
